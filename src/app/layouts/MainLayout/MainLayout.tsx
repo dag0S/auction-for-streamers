@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import { SidebarProvider, SidebarTrigger } from "@/src/shared/shadcn";
 
 import "../../styles/globals.css";
+import { AppSidebar } from "@/src/widgets/AppSidebar";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -22,7 +24,15 @@ const MainLayout = ({
 }>) => {
   return (
     <html lang="ru">
-      <body className={`${roboto.variable} antialiased`}>{children}</body>
+      <body className={`${roboto.variable} antialiased`}>
+        <SidebarProvider>
+          <AppSidebar />
+          <main className="w-full">
+            <SidebarTrigger />
+            {children}
+          </main>
+        </SidebarProvider>
+      </body>
     </html>
   );
 };
