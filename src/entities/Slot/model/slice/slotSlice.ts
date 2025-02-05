@@ -6,18 +6,16 @@ const initialState: SlotsSchema = {
   slots: [],
 };
 
-let fastId = 0;
+let maxFastId = 0;
 
 export const slotsSlice = createSlice({
   name: "slots",
   initialState,
   reducers: {
     addSlot: (state, action: PayloadAction<ISlotInput>) => {
-      fastId++;
-
       state.slots.push({
         ...action.payload,
-        fastId: +fastId,
+        fastId: ++maxFastId,
         id: Math.random().toString(),
       });
     },
@@ -26,7 +24,7 @@ export const slotsSlice = createSlice({
 
       const foundSlotIndex = state.slots.findIndex((slot) => slot.id === id);
 
-      if (foundSlotIndex !== 1) {
+      if (foundSlotIndex !== -1) {
         state.slots[foundSlotIndex] = action.payload;
       }
     },

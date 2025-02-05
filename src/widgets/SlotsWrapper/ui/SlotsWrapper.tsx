@@ -126,6 +126,7 @@ interface Props {
 
 export const SlotsWrapper: FC<Props> = ({ className }) => {
   const slots = useAppSelector((state) => state.slots.slots);
+  const totalAmount = slots.reduce((acc, slot) => (acc += +slot.amount), 0);
 
   if (slots.length === 0) {
     return <h2 className="text-2xl font-semibold">Добавьте слоты</h2>;
@@ -142,6 +143,7 @@ export const SlotsWrapper: FC<Props> = ({ className }) => {
           number={index + 1}
           id={slot.id}
           key={slot.id}
+          totalAmount={totalAmount}
         />
       ))}
     </ScrollArea>

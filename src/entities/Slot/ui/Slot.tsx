@@ -8,6 +8,7 @@ import { Badge, Button, Form, FormField, Input } from "@/src/shared/shadcn";
 import { ISlot, ISlotInputWithExtraMoney } from "../model/types/slot";
 import { useAppDispatch } from "@/src/shared/lib/hooks";
 import { slotsActions } from "../model/slice/slotSlice";
+import { calcPercent } from "@/src/shared/utils";
 
 interface Props {
   className?: string;
@@ -16,6 +17,7 @@ interface Props {
   name: string;
   id: string;
   number: number;
+  totalAmount: number;
 }
 
 export const Slot: FC<Props> = ({
@@ -25,6 +27,7 @@ export const Slot: FC<Props> = ({
   name,
   id,
   number,
+  totalAmount,
 }) => {
   const form = useForm<ISlotInputWithExtraMoney>({
     defaultValues: {
@@ -34,19 +37,24 @@ export const Slot: FC<Props> = ({
     },
   });
   const dispatch = useAppDispatch();
+  const percent = calcPercent(+amount, totalAmount);
 
   const onSubmit = (values: ISlotInputWithExtraMoney) => {
+    const newAmount = values.extraMoney
+      ? String(+values.amount + +values.extraMoney)
+      : values.amount;
+
     const updatedSlot: ISlot = {
-      ...values,
-      amount: values.extraMoney
-        ? String(+values.amount + +values.extraMoney)
-        : values.amount,
+      name: values.name,
+      amount: newAmount,
       fastId,
       id,
     };
 
+    form.setValue("extraMoney", "");
+    form.setValue("amount", newAmount);
     dispatch(slotsActions.updateSlot(updatedSlot));
-    console.log(`[Update slot] ${updatedSlot}`);
+    console.log(`[Update slot] ${id}`);
   };
 
   const handleRemoveSlot = () => {
@@ -68,7 +76,7 @@ export const Slot: FC<Props> = ({
             name="name"
             render={({ field }) => <Input placeholder="Название" {...field} />}
           />
-          <div>100.0%</div>
+          <div>{percent}%</div>
           <FormField
             control={form.control}
             name="amount"
