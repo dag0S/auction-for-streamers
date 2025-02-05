@@ -27,10 +27,10 @@ const MainLayout = ({
     <html lang="ru">
       <body className={`${roboto.variable} antialiased`}>
         <StoreProvider>
-          <SidebarProvider>
+          <SidebarProvider className="relative">
             <AppSidebar />
             <main className="w-full">
-              <SidebarTrigger />
+              <SidebarTrigger className="absolute left-2 top-2 z-10 p-2" />
               {children}
             </main>
           </SidebarProvider>

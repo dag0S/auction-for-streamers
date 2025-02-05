@@ -1,30 +1,38 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SlotsSchema } from "../types/slotsSchema";
-import { ISlotInput } from "../types/slot";
+import { ISlot, ISlotInput } from "../types/slot";
 
 const initialState: SlotsSchema = {
   slots: [],
 };
 
-let fastId = 1;
+let fastId = 0;
 
 export const slotsSlice = createSlice({
   name: "slots",
   initialState,
   reducers: {
     addSlot: (state, action: PayloadAction<ISlotInput>) => {
-      const { amount, name } = action.payload;
       fastId++;
 
-      state.slots = [
-        ...state.slots,
-        {
-          amount,
-          name,
-          fastId,
-          id: Math.random().toString(),
-        },
-      ];
+      state.slots.push({
+        ...action.payload,
+        fastId: +fastId,
+        id: Math.random().toString(),
+      });
+    },
+    updateSlot: (state, action: PayloadAction<ISlot>) => {
+      const { id } = action.payload;
+
+      const foundSlotIndex = state.slots.findIndex((slot) => slot.id === id);
+
+      if (foundSlotIndex !== 1) {
+        state.slots[foundSlotIndex] = action.payload;
+      }
+    },
+    removeSlot: (state, action: PayloadAction<string>) => {
+      const id = action.payload;
+      state.slots = state.slots.filter((slot) => slot.id !== id);
     },
   },
 });

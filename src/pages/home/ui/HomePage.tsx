@@ -1,16 +1,16 @@
 import { FC } from "react";
-import { Slot } from "@/src/entities/Slot";
 import { Separator } from "@/src/shared/shadcn";
 import { Container } from "@/src/shared/ui";
 import { SlotsHeader } from "@/src/widgets/SlotsHeader";
+import { SlotsWrapper } from "@/src/widgets/SlotsWrapper";
 
 const HomePage: FC = () => {
   return (
     <div>
-      <Container>
+      <Container className="h-screen flex flex-col">
         <SlotsHeader className="mb-3" />
         <Separator className="mb-3" />
-        <Slot />
+        <SlotsWrapper className="flex-grow" />
       </Container>
     </div>
   );

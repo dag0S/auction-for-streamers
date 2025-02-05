@@ -2,6 +2,7 @@ export { Button } from "./button";
 export { Input } from "./input";
 export { Separator } from "./separator";
 export { Badge } from "./badge";
+export { ScrollArea } from "./scroll-area";
 export {
   Sidebar,
   SidebarContent,
@@ -28,3 +29,13 @@ export {
   SidebarTrigger,
   useSidebar,
 } from "./sidebar";
+export {
+  useFormField,
+  Form,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+  FormField,
+} from "./form";

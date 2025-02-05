@@ -42,8 +42,8 @@ export const AppSidebar: FC<Props> = ({ className }) => {
   const pathname = usePathname();
 
   return (
-    <Sidebar className={cn("", className)} collapsible="icon">
-      <SidebarContent>
+    <Sidebar className={cn("", className)} collapsible="icon" >
+      <SidebarContent className="pt-10">
         <SidebarGroup>
           <SidebarGroupLabel className="text-base">Меню</SidebarGroupLabel>
           <SidebarGroupContent>
