@@ -1,9 +1,15 @@
 "use client";
 
+import { CircleHelp, Gavel, LoaderPinwheel } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { FC } from "react";
+import { SwitchTheme } from "@/src/features/SwitchTheme";
 import { cn } from "@/src/shared/lib";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -11,10 +17,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/src/shared/shadcn";
-import { CircleHelp, Gavel, LoaderPinwheel } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { FC } from "react";
 
 interface Props {
   className?: string;
@@ -42,18 +44,18 @@ export const AppSidebar: FC<Props> = ({ className }) => {
   const pathname = usePathname();
 
   return (
-    <Sidebar className={cn("", className)} collapsible="icon" >
+    <Sidebar className={cn("", className)} collapsible="icon">
       <SidebarContent className="pt-10">
         <SidebarGroup>
           <SidebarGroupLabel className="text-base">Меню</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-3">
+            <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
                     isActive={pathname === item.url}
-                    className="text-lg"
+                    className="text-lg py-5"
                   >
                     <Link href={item.url} className="flex items-center gap-4">
                       <item.icon />
@@ -66,6 +68,13 @@ export const AppSidebar: FC<Props> = ({ className }) => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SwitchTheme />
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 };

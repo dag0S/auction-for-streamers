@@ -127,6 +127,7 @@ interface Props {
 export const SlotsWrapper: FC<Props> = ({ className }) => {
   const slots = useAppSelector((state) => state.slots.slots);
   const totalAmount = slots.reduce((acc, slot) => (acc += +slot.amount), 0);
+  const sortedSlots = [...slots].sort((a, b) => +b.amount - +a.amount);
 
   if (slots.length === 0) {
     return <h2 className="text-2xl font-semibold">Добавьте слоты</h2>;
@@ -134,7 +135,7 @@ export const SlotsWrapper: FC<Props> = ({ className }) => {
 
   return (
     <ScrollArea className={cn("border rounded-md", className)}>
-      {slots.map((slot, index) => (
+      {sortedSlots.map((slot, index) => (
         <Slot
           className="p-3"
           amount={slot.amount}

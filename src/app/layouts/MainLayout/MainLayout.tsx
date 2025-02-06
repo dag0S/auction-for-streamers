@@ -5,6 +5,7 @@ import { AppSidebar } from "@/src/widgets/AppSidebar";
 import { StoreProvider } from "../../providers/StoreProvider";
 
 import "../../styles/globals.css";
+import { ThemeProvider } from "../../providers/ThemeProvider";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -24,17 +25,24 @@ const MainLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="ru">
+    <html lang="ru" suppressHydrationWarning>
       <body className={`${roboto.variable} antialiased`}>
-        <StoreProvider>
-          <SidebarProvider className="relative">
-            <AppSidebar />
-            <main className="w-full">
-              <SidebarTrigger className="absolute left-2 top-2 z-10 p-2" />
-              {children}
-            </main>
-          </SidebarProvider>
-        </StoreProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <StoreProvider>
+            <SidebarProvider className="relative">
+              <AppSidebar />
+              <main className="w-full">
+                <SidebarTrigger className="absolute left-2 top-2 z-10 p-2" />
+                {children}
+              </main>
+            </SidebarProvider>
+          </StoreProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

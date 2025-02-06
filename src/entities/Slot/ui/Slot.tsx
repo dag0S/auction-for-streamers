@@ -76,7 +76,7 @@ export const Slot: FC<Props> = ({
             name="name"
             render={({ field }) => <Input placeholder="Название" {...field} />}
           />
-          <div>{percent}%</div>
+          <div className="min-w-14 text-right">{percent}%</div>
           <FormField
             control={form.control}
             name="amount"
@@ -89,7 +89,7 @@ export const Slot: FC<Props> = ({
               />
             )}
           />
-          <Button type="submit" variant="ghost">
+          <Button type="submit" variant="ghost" title="Прибавить стоимость">
             <Plus hanging={24} width={24} />
           </Button>
           <FormField
@@ -106,7 +106,7 @@ export const Slot: FC<Props> = ({
           />
         </form>
       </Form>
-      <Button variant="ghost" onClick={handleRemoveSlot}>
+      <Button variant="ghost" onClick={handleRemoveSlot} title="Удалить слот">
         <Trash />
       </Button>
     </div>

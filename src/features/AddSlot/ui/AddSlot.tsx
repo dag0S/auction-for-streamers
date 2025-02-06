@@ -1,7 +1,7 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { cn } from "@/src/shared/lib";
 import {
@@ -26,11 +26,16 @@ export const AddSlot: FC<Props> = ({ className }) => {
       name: "",
     },
   });
-
   const dispatch = useAppDispatch();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const onSubmit = (values: ISlotInput) => {
     dispatch(slotsActions.addSlot(values));
+
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+
     form.reset();
     console.log(`[AddSlot] ${values}`);
   };
@@ -51,6 +56,7 @@ export const AddSlot: FC<Props> = ({ className }) => {
                   placeholder="Название нового лота"
                   className="font-semibold"
                   {...field}
+                  ref={inputRef}
                 />
               </FormControl>
             </FormItem>

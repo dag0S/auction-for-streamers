@@ -10,7 +10,7 @@ interface Props {
 
 export const SlotSearch: FC<Props> = ({ className }) => {
   return (
-    <div className={cn("w-full relative", className)}>
+    <div className={cn("relative w-[400px]", className)}>
       <Search className="absolute top-1/2 left-2 -translate-y-1/2" />
       <Input
         placeholder="Поис среди лотов ..."
