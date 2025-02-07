@@ -106,7 +106,11 @@ export const Slot: FC<Props> = ({
           />
         </form>
       </Form>
-      <Button variant="ghost" onClick={handleRemoveSlot} title="Удалить слот">
+      <Button
+        variant="destructive"
+        onClick={handleRemoveSlot}
+        title="Удалить слот"
+      >
         <Trash />
       </Button>
     </div>

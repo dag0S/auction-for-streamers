@@ -149,13 +149,15 @@ export const SlotsWrapper: FC<Props> = ({ className }) => {
 
   if (sortedSlots.length === 0) {
     return (
-      <h2 className="text-2xl font-semibold max-w-[500px] break-words">Добавьте слоты</h2>
+      <h2 className="text-2xl font-semibold max-w-[500px] break-words h-full">
+        Добавьте слоты
+      </h2>
     );
   }
 
   if (filteredSlots.length === 0) {
     return (
-      <h2 className="text-2xl font-semibold max-w-[500px] break-words">
+      <h2 className="text-2xl font-semibold max-w-[500px] break-words h-full">
         По запросу &quot;{searchValue}&quot; ничего не найдено
       </h2>
     );
