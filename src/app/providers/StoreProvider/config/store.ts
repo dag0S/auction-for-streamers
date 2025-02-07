@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { slotsReducer } from "@/src/entities/Slot";
+import { searchReducer } from "@/src/widgets/SlotSearch";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       slots: slotsReducer,
+      search: searchReducer,
     },
   });
 };

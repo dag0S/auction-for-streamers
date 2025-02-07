@@ -106,19 +106,40 @@ export const Timer: FC<Props> = ({ className, initialTime = 600000 }) => {
           variant="ghost"
           size="icon"
           onClick={isRunning ? handleStopTimer : handelStartTimer}
+          title={isRunning ? "Пауза" : "Продолжить"}
         >
           {isRunning ? <Pause /> : <Play />}
         </Button>
-        <Button variant="ghost" size="icon" onClick={handelResetTime}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handelResetTime}
+          title="Обнулить"
+        >
           <RotateCcw />
         </Button>
-        <Button variant="ghost" size="icon" onClick={handleAdd10Sec}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleAdd10Sec}
+          title="+10 сек"
+        >
           <ChevronUp />
         </Button>
-        <Button variant="ghost" size="icon" onClick={handleSubtract10Sec}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleSubtract10Sec}
+          title="-10 сек"
+        >
           <ChevronDown />
         </Button>
-        <Button variant="ghost" size="icon" onClick={handleAdd20Sec}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleAdd20Sec}
+          title="+20 сек"
+        >
           <ChevronsUp />
         </Button>
       </div>

@@ -1,1 +1,2 @@
-export {} from "./ui/SlotSearch";
+export { SlotSearch } from "./ui/SlotSearch";
+export { searchReducer } from "./model/slice/searchSlice";
