@@ -15,7 +15,7 @@ const HomePage: FC = () => {
           <SlotsWrapper className="flex-grow mb-3" />
         </div>
         <div>
-          <Timer />
+          <Timer className="mt-3" />
         </div>
       </Container>
     </div>
