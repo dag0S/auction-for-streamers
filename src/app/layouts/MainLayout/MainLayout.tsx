@@ -26,7 +26,7 @@ const MainLayout = ({
 }>) => {
   return (
     <html lang="ru" suppressHydrationWarning>
-      <body className={`${roboto.variable} antialiased`}>
+      <body className={`${roboto.variable} antialiased overflow-hidden`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

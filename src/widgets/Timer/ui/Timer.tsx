@@ -12,6 +12,7 @@ import {
 import { cn } from "@/src/shared/lib";
 import { formatTime } from "@/src/shared/utils";
 import { Button } from "@/src/shared/shadcn";
+import { useAppSelector } from "@/src/shared/lib/hooks";
 
 interface Props {
   className?: string;
@@ -24,6 +25,7 @@ export const Timer: FC<Props> = ({ className, initialTime = 600000 }) => {
   const timeLeftRef = useRef(initialTime);
   const startTimeRef = useRef<number>(0);
   const animationFrameRef = useRef<number>(0);
+  const { timer } = useAppSelector((state) => state.options);
 
   const updateTimer = () => {
     if (timeLeftRef.current <= 0) {
@@ -95,6 +97,10 @@ export const Timer: FC<Props> = ({ className, initialTime = 600000 }) => {
       }
     };
   }, []);
+
+  if (!timer) {
+    return null;
+  }
 
   return (
     <div className={cn("", className)}>

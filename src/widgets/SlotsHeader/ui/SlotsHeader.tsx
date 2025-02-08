@@ -1,8 +1,8 @@
 import { cn } from "@/src/shared/lib/utils";
 import { Separator } from "@/src/shared/shadcn";
 import { FC } from "react";
-import { SlotSearch } from "../../SlotSearch/ui/SlotSearch";
 import { AddSlot } from "@/src/features/AddSlot";
+import { SlotSearch } from "@/src/features/SlotSearch";
 
 interface Props {
   className?: string;

@@ -56,3 +56,5 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 } from "./dropdown-menu";
+export { Toggle } from "./toggle";
+export { Textarea } from "./textarea";

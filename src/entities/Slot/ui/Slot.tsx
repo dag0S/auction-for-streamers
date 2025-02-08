@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { cn } from "@/src/shared/lib";
 import { Badge, Button, Form, FormField, Input } from "@/src/shared/shadcn";
 import { ISlot, ISlotInputWithExtraMoney } from "../model/types/slot";
-import { useAppDispatch } from "@/src/shared/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/src/shared/lib/hooks";
 import { slotsActions } from "../model/slice/slotSlice";
 import { calcPercent } from "@/src/shared/utils";
 
@@ -37,6 +37,7 @@ export const Slot: FC<Props> = ({
     },
   });
   const dispatch = useAppDispatch();
+  const { percent: percentActive } = useAppSelector((state) => state.options);
   const percent = calcPercent(+amount, totalAmount);
 
   const onSubmit = (values: ISlotInputWithExtraMoney) => {
@@ -76,7 +77,9 @@ export const Slot: FC<Props> = ({
             name="name"
             render={({ field }) => <Input placeholder="Название" {...field} />}
           />
-          <div className="min-w-14 text-right">{percent}%</div>
+          {percentActive && (
+            <div className="min-w-14 text-right">{percent}%</div>
+          )}
           <FormField
             control={form.control}
             name="amount"
