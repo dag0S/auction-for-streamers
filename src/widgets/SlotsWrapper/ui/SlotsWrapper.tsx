@@ -1,7 +1,8 @@
 "use client";
 
 import { FC, useEffect } from "react";
-import { Slot, slotsActions } from "@/src/entities/Slot";
+import { AnimatePresence } from "framer-motion";
+import { MotionSlot, slotsActions } from "@/src/entities/Slot";
 import { SLOTS_LOCALSTORAGE_KEY } from "@/src/shared/const/localstorage";
 import { cn } from "@/src/shared/lib";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/hooks";
@@ -51,18 +52,34 @@ export const SlotsWrapper: FC<Props> = ({ className }) => {
 
   return (
     <ScrollArea className={cn("border rounded-md", className)}>
-      {filteredSlots.map((slot, index) => (
-        <Slot
-          className="p-3"
-          amount={slot.amount}
-          fastId={slot.fastId}
-          name={slot.name}
-          number={index + 1}
-          id={slot.id}
-          key={slot.id}
-          totalAmount={totalAmount}
-        />
-      ))}
+      <AnimatePresence>
+        {filteredSlots.map((slot, index) => (
+          <MotionSlot
+            className="p-3"
+            amount={slot.amount}
+            fastId={slot.fastId}
+            name={slot.name}
+            number={index + 1}
+            id={slot.id}
+            key={slot.id}
+            totalAmount={totalAmount}
+            layout
+            initial={{
+              opacity: 0,
+              y: -20,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              y: 20,
+            }}
+            transition={{ duration: 0.3 }}
+          />
+        ))}
+      </AnimatePresence>
     </ScrollArea>
   );
 };
