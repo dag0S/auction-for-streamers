@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/src/shared/lib/hooks";
 import { Button, Toggle } from "@/src/shared/shadcn";
 import { slotsActions } from "@/src/entities/Slot";
 import { optionsAction } from "../model/slice/optionsSlice";
+import { Alert } from "@/src/shared/ui";
 
 interface Props {
   className?: string;
@@ -14,7 +15,10 @@ interface Props {
 
 export const SlotsOptions: FC<Props> = ({ className }) => {
   const dispatch = useAppDispatch();
-  const { percent, rules, timer } = useAppSelector((state) => state.options);
+  const { slots } = useAppSelector((state) => state.slots);
+  const { showPercent, showRules, showTimer } = useAppSelector(
+    (state) => state.options
+  );
 
   const handlerTogglePercent = () => {
     dispatch(optionsAction.togglePercent());
@@ -34,21 +38,27 @@ export const SlotsOptions: FC<Props> = ({ className }) => {
 
   return (
     <div className={cn("flex justify-center gap-3 py-3", className)}>
-      <Button
-        size="icon"
+      <Alert
         onClick={handlerClearAllSlots}
-        variant="destructive"
-        title="Удалить все слоты"
+        title="Вы точно уверены?"
+        description="Это действие нельзя отменить. Это приведет к необратимому удалению всех слотов."
       >
-        <Trash2 />
-      </Button>
+        <Button
+          size="icon"
+          variant="destructive"
+          title="Удалить все слоты"
+          disabled={slots.length === 0}
+        >
+          <Trash2 />
+        </Button>
+      </Alert>
 
       <div>
         <Toggle
           variant="outline"
           className="rounded-r-none"
           title="Показать правила аукциона"
-          pressed={rules}
+          pressed={showRules}
           onPressedChange={handlerToggleRules}
         >
           <NotepadText />
@@ -58,7 +68,7 @@ export const SlotsOptions: FC<Props> = ({ className }) => {
           variant="outline"
           className="rounded-none -ml-[1px]"
           title="Показать проценты"
-          pressed={percent}
+          pressed={showPercent}
           onPressedChange={handlerTogglePercent}
         >
           <Percent />
@@ -67,7 +77,7 @@ export const SlotsOptions: FC<Props> = ({ className }) => {
           variant="outline"
           className="rounded-l-none -ml-[1px]"
           title="Показать таймер"
-          pressed={timer}
+          pressed={showTimer}
           onPressedChange={handlerToggleTimer}
         >
           <Timer />

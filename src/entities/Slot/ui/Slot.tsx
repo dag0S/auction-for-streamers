@@ -31,7 +31,7 @@ export const Slot = forwardRef<HTMLDivElement, Props>(
       },
     });
     const dispatch = useAppDispatch();
-    const { percent: percentActive } = useAppSelector((state) => state.options);
+    const { showPercent } = useAppSelector((state) => state.options);
     const percent = calcPercent(+amount, totalAmount);
 
     const onSubmit = (values: ISlotInputWithExtraMoney) => {
@@ -73,7 +73,7 @@ export const Slot = forwardRef<HTMLDivElement, Props>(
                 <Input placeholder="Название" {...field} />
               )}
             />
-            {percentActive && (
+            {showPercent && (
               <div className="min-w-14 text-right">{percent}%</div>
             )}
             <FormField

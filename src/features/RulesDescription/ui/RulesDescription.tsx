@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const RulesDescription: FC<Props> = ({ className }) => {
-  const { rules } = useAppSelector((state) => state.options);
+  const { showRules } = useAppSelector((state) => state.options);
   const { descriptionValue } = useAppSelector((state) => state.rulesDesc);
   const dispatch = useAppDispatch();
 
@@ -36,7 +36,7 @@ export const RulesDescription: FC<Props> = ({ className }) => {
     localStorage.setItem(RULES_DESC_LOCALSTORAGE_KEY, descriptionValue);
   }, [descriptionValue]);
 
-  if (!rules) {
+  if (!showRules) {
     return null;
   }
 

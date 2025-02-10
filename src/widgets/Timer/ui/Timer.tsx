@@ -25,7 +25,7 @@ export const Timer: FC<Props> = ({ className, initialTime = 600000 }) => {
   const timeLeftRef = useRef(initialTime);
   const startTimeRef = useRef<number>(0);
   const animationFrameRef = useRef<number>(0);
-  const { timer } = useAppSelector((state) => state.options);
+  const { showTimer } = useAppSelector((state) => state.options);
 
   const updateTimer = () => {
     if (timeLeftRef.current <= 0) {
@@ -98,7 +98,7 @@ export const Timer: FC<Props> = ({ className, initialTime = 600000 }) => {
     };
   }, []);
 
-  if (!timer) {
+  if (!showTimer) {
     return null;
   }
 

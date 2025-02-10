@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import { OptionsSchema } from "../types/optionsSchema";
 
 const initialState: OptionsSchema = {
-  percent: true,
-  rules: false,
-  timer: true,
+  showPercent: true,
+  showRules: false,
+  showTimer: true,
 };
 
 export const optionsSlice = createSlice({
@@ -12,13 +12,13 @@ export const optionsSlice = createSlice({
   initialState,
   reducers: {
     togglePercent: (state) => {
-      state.percent = !state.percent;
+      state.showPercent = !state.showPercent;
     },
     toggleRules: (state) => {
-      state.rules = !state.rules;
+      state.showRules = !state.showRules;
     },
     toggleTimer: (state) => {
-      state.timer = !state.timer;
+      state.showTimer = !state.showTimer;
     },
   },
 });

@@ -1,5 +1,5 @@
 export interface OptionsSchema {
-  rules: boolean;
-  percent: boolean;
-  timer: boolean;
+  showRules: boolean;
+  showPercent: boolean;
+  showTimer: boolean;
 }
