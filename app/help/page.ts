@@ -1,1 +1,1 @@
-export { HelpPage as default } from "@/src/pages/Help";
+export { HelpPage as default, metadata } from "@/src/pages/Help";
