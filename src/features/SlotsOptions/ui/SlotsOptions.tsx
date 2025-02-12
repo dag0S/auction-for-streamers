@@ -1,6 +1,13 @@
 "use client";
 
-import { NotepadText, Percent, Timer, Trash2 } from "lucide-react";
+import {
+  Eye,
+  EyeClosed,
+  NotepadText,
+  Percent,
+  Timer,
+  Trash2,
+} from "lucide-react";
 import { FC } from "react";
 import { cn } from "@/src/shared/lib";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/hooks";
@@ -16,9 +23,10 @@ interface Props {
 export const SlotsOptions: FC<Props> = ({ className }) => {
   const dispatch = useAppDispatch();
   const { slots } = useAppSelector((state) => state.slots);
-  const { showPercent, showRules, showTimer } = useAppSelector(
+  const { showPercent, showRules, showTimer, showTotalAmount } = useAppSelector(
     (state) => state.options
   );
+  const totalAmount = slots.reduce((acc, slot) => (acc += +slot.amount), 0);
 
   const handlerTogglePercent = () => {
     dispatch(optionsAction.togglePercent());
@@ -32,12 +40,28 @@ export const SlotsOptions: FC<Props> = ({ className }) => {
     dispatch(optionsAction.toggleTimer());
   };
 
+  const handlerToggleTotalAmount = () => {
+    dispatch(optionsAction.toggleShowTotalAmount());
+  };
+
   const handlerClearAllSlots = () => {
     dispatch(slotsActions.clearAllSlots());
   };
 
   return (
-    <div className={cn("flex justify-center gap-3 py-3", className)}>
+    <div className={cn("flex justify-center gap-3 py-3 relative", className)}>
+      <div className="absolute t-0 left-0 flex gap-3 items-center">
+        <Button
+          variant="ghost"
+          className="rounded-full"
+          size="icon"
+          onClick={handlerToggleTotalAmount}
+          title={showTotalAmount ? "Скрыть" : "Показать сумму денег"}
+        >
+          {showTotalAmount ? <EyeClosed /> : <Eye />}
+        </Button>
+        {showTotalAmount && <span>Всего: {totalAmount}₽</span>}
+      </div>
       <Alert
         onClick={handlerClearAllSlots}
         title="Вы точно уверены?"

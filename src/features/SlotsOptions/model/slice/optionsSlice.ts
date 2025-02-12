@@ -5,6 +5,7 @@ const initialState: OptionsSchema = {
   showPercent: true,
   showRules: false,
   showTimer: true,
+  showTotalAmount: false,
 };
 
 export const optionsSlice = createSlice({
@@ -19,6 +20,9 @@ export const optionsSlice = createSlice({
     },
     toggleTimer: (state) => {
       state.showTimer = !state.showTimer;
+    },
+    toggleShowTotalAmount: (state) => {
+      state.showTotalAmount = !state.showTotalAmount;
     },
   },
 });
