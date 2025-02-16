@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useTranslations } from "next-intl";
 import { Separator } from "@/src/shared/shadcn";
 import { Container } from "@/src/shared/ui";
 import { SlotsHeader } from "@/src/widgets/SlotsHeader";
@@ -8,8 +9,13 @@ import { SlotsOptions } from "@/src/features/SlotsOptions";
 import { RulesDescription } from "@/src/features/RulesDescription";
 
 const HomePage: FC = () => {
+  const t = useTranslations("WheelPage");
   return (
     <div>
+      <div>
+        <h2>{t("title")}</h2>
+        <p>{t("content")}</p>
+      </div>
       <Container className="flex flex-col h-screen">
         <div className="flex gap-3 flex-grow h-full min-h-0">
           <RulesDescription className="mt-3" />

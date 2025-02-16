@@ -17,6 +17,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/src/shared/shadcn";
+import { SwitchLanguage } from "@/src/features/SwitchLanguage";
 
 interface Props {
   className?: string;
@@ -70,6 +71,9 @@ export const AppSidebar: FC<Props> = ({ className }) => {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
+          <SidebarMenuItem>
+            <SwitchLanguage />
+          </SidebarMenuItem>
           <SidebarMenuItem>
             <SwitchTheme />
           </SidebarMenuItem>
