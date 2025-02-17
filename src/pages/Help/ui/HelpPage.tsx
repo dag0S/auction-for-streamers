@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { FC } from "react";
 import { ScrollArea } from "@/src/shared/shadcn";
 import { Container } from "@/src/shared/ui";
+import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
   title: "Аукцион для стримеров | О сайте",
@@ -9,18 +10,20 @@ export const metadata: Metadata = {
 };
 
 const HelpPage: FC = () => {
+  const t = useTranslations("HelpPage");
+
   return (
-    <ScrollArea className="pt-2 min-h-0 h-screen">
+    <ScrollArea className="pt-2 h-svh">
       <Container className="max-w-[1000px]">
-        <h2 className="text-6xl mb-2">О сайте</h2>
+        <h2 className="text-6xl mb-2">{t("title")}</h2>
         <h3 className="text-2xl mb-2">
-          Аукцион для стримеров -{" "}
+          {t("sub-title-1")}
           <a className="text-blue-400 underline hover:opacity-80" href="#">
             auction-for-streamers.com
           </a>
         </h3>
         <div className="mb-2">
-          Этот сайт представляет собой учебную копию{" "}
+          {t("text-1")}
           <a
             className="text-blue-400 underline hover:opacity-80"
             href="https://pointauc.com/"
@@ -28,50 +31,42 @@ const HelpPage: FC = () => {
           >
             pointauc.com
           </a>
-          , и создан исключительно для обучения. Он разработан с использованием
-          следующих технологий: React, Redux Toolkit, NextJS, Typescript, React
-          Hook Form и Framer Motion. Полный исходный код можно найти в
-          репозитории на GitHub по{" "}
+          {t("text-2")}
           <a
             className="text-blue-400 underline hover:opacity-80"
             href="https://github.com/dag0S/auction-for-streamers"
             target="_blank"
           >
-            ссылке
+            {t("link")}
           </a>
           .
         </div>
-        <div className="mb-6">
-          Этот сайт предназначен для взаимодействия между стримером и его
-          аудиторией, позволяя им совместно принимать решения во время стрима.
-          Будь то выбор фильма, сериала или игры для развлечения.
-        </div>
-        <h3 className="text-2xl mb-2">Функционал</h3>
+        <div className="mb-6">{t("text-3")}</div>
+        <h3 className="text-2xl mb-2">{t("sub-title-2")}</h3>
         <ol className="list-decimal pl-6 mb-6">
-          <li className="mb-1">
-            <b>Управление лотами:</b> Возможность добавлять, удалять, обновлять,
-            искать и сохранять лоты в локальном хранилище.
-          </li>
-          <li className="mb-1">
-            <b>Колесо Фортуны:</b> Определяет победителя в интерактивном режиме.
-          </li>
-          <li className="mb-1">
-            <b>Таймер:</b> Позволяет устанавливать время для стрима.
-          </li>
-          <li className="mb-1">
-            <b>Темы:</b> Смена темы приложения (темная/светлая).
-          </li>
-          <li>
-            <b>Языки:</b> Возможность выбора языка интерфейса.
-          </li>
+          <li
+            className="mb-1"
+            dangerouslySetInnerHTML={{ __html: t.raw("list-item-1") }}
+          ></li>
+          <li
+            className="mb-1"
+            dangerouslySetInnerHTML={{ __html: t.raw("list-item-2") }}
+          />
+          <li
+            className="mb-1"
+            dangerouslySetInnerHTML={{ __html: t.raw("list-item-3") }}
+          />
+          <li
+            className="mb-1"
+            dangerouslySetInnerHTML={{ __html: t.raw("list-item-4") }}
+          />
+          <li dangerouslySetInnerHTML={{ __html: t.raw("list-item-5") }} />
         </ol>
-        <h3 className="text-2xl mb-2">Контакты</h3>
-        <div>
-          Вы можете связаться с создателем сайта по следующим контактам:
-        </div>
+        <h3 className="text-2xl mb-2">{t("sub-title-3")}</h3>
+        <div>{t("text-4")}</div>
         <ul>
           <li>
-            telegram -{" "}
+            Telegram -{" "}
             <a
               href="https://t.me/DanilaGosudarev"
               target="_blank"
@@ -81,7 +76,7 @@ const HelpPage: FC = () => {
             </a>
           </li>
           <li>
-            gmail -{" "}
+            Gmail -{" "}
             <a
               href="mailto:danidagosudarev@gmail.com"
               target="_blank"

@@ -7,6 +7,7 @@ import { SLOTS_LOCALSTORAGE_KEY } from "@/src/shared/const/localstorage";
 import { cn } from "@/src/shared/lib";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/hooks";
 import { ScrollArea } from "@/src/shared/shadcn";
+import { useTranslations } from "next-intl";
 
 interface Props {
   className?: string;
@@ -18,6 +19,7 @@ export const SlotsWrapper: FC<Props> = ({ className }) => {
   const totalAmount = slots.reduce((acc, slot) => (acc += +slot.amount), 0);
   const sortedSlots = [...slots].sort((a, b) => +b.amount - +a.amount);
   const { searchValue } = useAppSelector((state) => state.search);
+  const t = useTranslations("SlotWrapper");
 
   useEffect(() => {
     const savedSlots = localStorage.getItem(SLOTS_LOCALSTORAGE_KEY);
@@ -37,7 +39,7 @@ export const SlotsWrapper: FC<Props> = ({ className }) => {
   if (sortedSlots.length === 0) {
     return (
       <h2 className="text-2xl font-semibold max-w-[500px] break-words h-full">
-        Добавьте слоты
+        {t("h2-add-slots")}
       </h2>
     );
   }
@@ -45,7 +47,7 @@ export const SlotsWrapper: FC<Props> = ({ className }) => {
   if (filteredSlots.length === 0) {
     return (
       <h2 className="text-2xl font-semibold max-w-[500px] break-words h-full overflow-y-auto">
-        По запросу &quot;{searchValue}&quot; ничего не найдено
+        {t("h2-nothing-found")}
       </h2>
     );
   }

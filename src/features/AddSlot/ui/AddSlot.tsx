@@ -4,6 +4,7 @@ import { Plus } from "lucide-react";
 import { FC, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { cn } from "@/src/shared/lib";
+import { useTranslations } from "next-intl";
 import {
   Button,
   Form,
@@ -28,6 +29,7 @@ export const AddSlot: FC<Props> = ({ className }) => {
   });
   const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
+  const t = useTranslations("AddSlot");
 
   const onSubmit = (values: ISlotInput) => {
     dispatch(slotsActions.addSlot(values));
@@ -53,7 +55,7 @@ export const AddSlot: FC<Props> = ({ className }) => {
             <FormItem className="w-full">
               <FormControl>
                 <Input
-                  placeholder="Название нового лота"
+                  placeholder={t("placeholder")}
                   className="font-semibold"
                   {...field}
                   ref={inputRef}
@@ -69,7 +71,7 @@ export const AddSlot: FC<Props> = ({ className }) => {
             <FormItem>
               <FormControl>
                 <Input
-                  placeholder="₽"
+                  placeholder={t("currency")}
                   type="number"
                   className="w-32 font-semibold"
                   {...field}
@@ -79,7 +81,7 @@ export const AddSlot: FC<Props> = ({ className }) => {
           )}
         />
         <Button type="submit">
-          <Plus /> ДОБАВИТЬ ЛОТ
+          <Plus /> {t("btn-add-slot")}
         </Button>
       </form>
     </Form>

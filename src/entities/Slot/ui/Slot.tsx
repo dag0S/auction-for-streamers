@@ -4,6 +4,7 @@ import { Plus, Trash } from "lucide-react";
 import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { cn } from "@/src/shared/lib";
 import { Badge, Button, Form, FormField, Input } from "@/src/shared/shadcn";
 import { ISlot, ISlotInputWithExtraMoney } from "../model/types/slot";
@@ -32,6 +33,7 @@ export const Slot = forwardRef<HTMLDivElement, Props>(
     });
     const dispatch = useAppDispatch();
     const { showPercent } = useAppSelector((state) => state.options);
+    const t = useTranslations("Slot");
     const percent = calcPercent(+amount, totalAmount);
 
     const onSubmit = (values: ISlotInputWithExtraMoney) => {
@@ -70,7 +72,7 @@ export const Slot = forwardRef<HTMLDivElement, Props>(
               control={form.control}
               name="name"
               render={({ field }) => (
-                <Input placeholder="Название" {...field} />
+                <Input placeholder={t("placeholder-name-slot")} {...field} />
               )}
             />
             {showPercent && (
@@ -82,13 +84,17 @@ export const Slot = forwardRef<HTMLDivElement, Props>(
               render={({ field }) => (
                 <Input
                   type="number"
-                  placeholder="₽"
+                  placeholder={t("currency")}
                   className="w-32"
                   {...field}
                 />
               )}
             />
-            <Button type="submit" variant="ghost" title="Прибавить стоимость">
+            <Button
+              type="submit"
+              variant="ghost"
+              title={t("title-btn-add-cost")}
+            >
               <Plus hanging={24} width={24} />
             </Button>
             <FormField
@@ -97,7 +103,7 @@ export const Slot = forwardRef<HTMLDivElement, Props>(
               render={({ field }) => (
                 <Input
                   type="number"
-                  placeholder="₽"
+                  placeholder={t("currency")}
                   className="w-24"
                   {...field}
                 />
@@ -108,7 +114,7 @@ export const Slot = forwardRef<HTMLDivElement, Props>(
         <Button
           variant="destructive"
           onClick={handleRemoveSlot}
-          title="Удалить слот"
+          title={t("title-btn-delete-slot")}
         >
           <Trash />
         </Button>

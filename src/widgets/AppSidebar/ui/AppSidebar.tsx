@@ -1,9 +1,8 @@
 "use client";
 
 import { CircleHelp, Gavel, LoaderPinwheel } from "lucide-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { SwitchTheme } from "@/src/features/SwitchTheme";
 import { cn } from "@/src/shared/lib";
 import {
@@ -18,37 +17,45 @@ import {
   SidebarMenuItem,
 } from "@/src/shared/shadcn";
 import { SwitchLanguage } from "@/src/features/SwitchLanguage";
+import { Link } from "@/src/shared/config/i18n/routing";
+import { useTranslations } from "next-intl";
 
 interface Props {
   className?: string;
 }
 
-const menuItems = [
-  {
-    title: "Аукцион",
-    url: "/",
-    icon: Gavel,
-  },
-  {
-    title: "Колесо рандома",
-    url: "/wheel",
-    icon: LoaderPinwheel,
-  },
-  {
-    title: "О сайте",
-    url: "/help",
-    icon: CircleHelp,
-  },
-];
-
 export const AppSidebar: FC<Props> = ({ className }) => {
   const pathname = usePathname();
+  const t = useTranslations("AppSidebar");
+
+  const menuItems = useMemo(
+    () => [
+      {
+        title: t("menu-item-auction"),
+        url: "/",
+        icon: Gavel,
+      },
+      {
+        title: t("menu-item-wheel"),
+        url: "/wheel",
+        icon: LoaderPinwheel,
+      },
+      {
+        title: t("menu-item-help"),
+        url: "/help",
+        icon: CircleHelp,
+      },
+    ],
+    [t]
+  );
 
   return (
     <Sidebar className={cn("", className)} collapsible="icon">
       <SidebarContent className="pt-10">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-base">Меню</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-base">
+            {t("menu")}
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (

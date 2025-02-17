@@ -10,6 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../../shadcn";
+import { useTranslations } from "next-intl";
 
 interface Props {
   children: ReactNode;
@@ -19,6 +20,8 @@ interface Props {
 }
 
 export const Alert: FC<Props> = ({ children, description, title, onClick }) => {
+  const t = useTranslations("Alert");
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
@@ -28,8 +31,10 @@ export const Alert: FC<Props> = ({ children, description, title, onClick }) => {
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Отмена</AlertDialogCancel>
-          <AlertDialogAction onClick={onClick}>Продолжить</AlertDialogAction>
+          <AlertDialogCancel>{t("btn-cancel")}</AlertDialogCancel>
+          <AlertDialogAction onClick={onClick}>
+            {t("btn-continue")}
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

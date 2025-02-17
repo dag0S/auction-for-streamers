@@ -41,16 +41,16 @@ const MainLayout = async ({
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <html lang={locale} suppressHydrationWarning>
-        <body className={`${roboto.variable} antialiased overflow-hidden`}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <StoreProvider>
+    <StoreProvider>
+      <NextIntlClientProvider messages={messages}>
+        <html lang={locale} suppressHydrationWarning>
+          <body className={`${roboto.variable} antialiased overflow-hidden`}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
               <SidebarProvider className="relative">
                 <AppSidebar />
                 <main className="w-full">
@@ -58,11 +58,11 @@ const MainLayout = async ({
                   {children}
                 </main>
               </SidebarProvider>
-            </StoreProvider>
-          </ThemeProvider>
-        </body>
-      </html>
-    </NextIntlClientProvider>
+            </ThemeProvider>
+          </body>
+        </html>
+      </NextIntlClientProvider>
+    </StoreProvider>
   );
 };
 

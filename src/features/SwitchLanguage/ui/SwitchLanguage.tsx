@@ -1,17 +1,19 @@
 "use client";
 
+import { Languages } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
+import { FC, useCallback, useMemo, useTransition } from "react";
 import { usePathname, useRouter } from "@/src/shared/config/i18n/routing";
 import { SidebarMenuButton } from "@/src/shared/shadcn";
 import { Dropdown, IDropdownMenuItem } from "@/src/shared/ui";
-import { Languages } from "lucide-react";
-import { useParams } from "next/navigation";
-import { FC, useCallback, useMemo, useTransition } from "react";
 
 export const SwitchLanguage: FC = () => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const params = useParams();
+  const t = useTranslations("SwitchLanguage");
 
   const changeLanguage = useCallback(
     (locale: string) => {
@@ -43,9 +45,9 @@ export const SwitchLanguage: FC = () => {
 
   return (
     <Dropdown items={langItems}>
-      <SidebarMenuButton variant="outline" className="max-w-[140px]">
+      <SidebarMenuButton variant="outline" className="w-fit">
         <Languages />
-        <span>Сменить язык</span>
+        <span>{t("language")}</span>
       </SidebarMenuButton>
     </Dropdown>
   );

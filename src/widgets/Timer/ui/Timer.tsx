@@ -1,6 +1,7 @@
 "use client";
 
 import { FC, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   ChevronDown,
   ChevronsUp,
@@ -26,6 +27,7 @@ export const Timer: FC<Props> = ({ className, initialTime = 600000 }) => {
   const startTimeRef = useRef<number>(0);
   const animationFrameRef = useRef<number>(0);
   const { showTimer } = useAppSelector((state) => state.options);
+  const t = useTranslations("Timer");
 
   const updateTimer = () => {
     if (timeLeftRef.current <= 0) {
@@ -112,7 +114,7 @@ export const Timer: FC<Props> = ({ className, initialTime = 600000 }) => {
           variant="ghost"
           size="icon"
           onClick={isRunning ? handleStopTimer : handelStartTimer}
-          title={isRunning ? "Пауза" : "Продолжить"}
+          title={isRunning ? t("pause") : t("play")}
         >
           {isRunning ? <Pause /> : <Play />}
         </Button>
@@ -120,7 +122,7 @@ export const Timer: FC<Props> = ({ className, initialTime = 600000 }) => {
           variant="ghost"
           size="icon"
           onClick={handelResetTime}
-          title="Обнулить"
+          title={t("reset")}
         >
           <RotateCcw />
         </Button>
@@ -128,7 +130,7 @@ export const Timer: FC<Props> = ({ className, initialTime = 600000 }) => {
           variant="ghost"
           size="icon"
           onClick={handleAdd10Sec}
-          title="+10 сек"
+          title={t("add-10-sec")}
         >
           <ChevronUp />
         </Button>
@@ -136,7 +138,7 @@ export const Timer: FC<Props> = ({ className, initialTime = 600000 }) => {
           variant="ghost"
           size="icon"
           onClick={handleSubtract10Sec}
-          title="-10 сек"
+          title={t("subtract-10-sec")}
         >
           <ChevronDown />
         </Button>
@@ -144,7 +146,7 @@ export const Timer: FC<Props> = ({ className, initialTime = 600000 }) => {
           variant="ghost"
           size="icon"
           onClick={handleAdd20Sec}
-          title="+20 сек"
+          title={t("add-20-sec")}
         >
           <ChevronsUp />
         </Button>

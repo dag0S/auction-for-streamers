@@ -9,6 +9,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { FC } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/src/shared/lib";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/hooks";
 import { Button, Toggle } from "@/src/shared/shadcn";
@@ -26,6 +27,7 @@ export const SlotsOptions: FC<Props> = ({ className }) => {
   const { showPercent, showRules, showTimer, showTotalAmount } = useAppSelector(
     (state) => state.options
   );
+  const t = useTranslations("SlotOptions");
   const totalAmount = slots.reduce((acc, slot) => (acc += +slot.amount), 0);
 
   const handlerTogglePercent = () => {
@@ -56,21 +58,30 @@ export const SlotsOptions: FC<Props> = ({ className }) => {
           className="rounded-full"
           size="icon"
           onClick={handlerToggleTotalAmount}
-          title={showTotalAmount ? "Скрыть" : "Показать сумму денег"}
+          title={
+            showTotalAmount
+              ? t("title-btn-hide-total")
+              : t("title-btn-show-total")
+          }
         >
           {showTotalAmount ? <EyeClosed /> : <Eye />}
         </Button>
-        {showTotalAmount && <span>Всего: {totalAmount}₽</span>}
+        {showTotalAmount && (
+          <span>
+            {t("total")}: {totalAmount}
+            {t("currency")}
+          </span>
+        )}
       </div>
       <Alert
         onClick={handlerClearAllSlots}
-        title="Вы точно уверены?"
-        description="Это действие нельзя отменить. Это приведет к необратимому удалению всех слотов."
+        title={t("alert-title")}
+        description={t("alert-description")}
       >
         <Button
           size="icon"
           variant="destructive"
-          title="Удалить все слоты"
+          title={t("title-btn-delete-all-slots")}
           disabled={slots.length === 0}
         >
           <Trash2 />
@@ -81,17 +92,17 @@ export const SlotsOptions: FC<Props> = ({ className }) => {
         <Toggle
           variant="outline"
           className="rounded-r-none"
-          title="Показать правила аукциона"
+          title={t("title-btn-show-rules")}
           pressed={showRules}
           onPressedChange={handlerToggleRules}
         >
           <NotepadText />
-          <span>ПРАВИЛА</span>
+          <span>{t("btn-rules")}</span>
         </Toggle>
         <Toggle
           variant="outline"
           className="rounded-none -ml-[1px]"
-          title="Показать проценты"
+          title={t("title-btn-show-percent")}
           pressed={showPercent}
           onPressedChange={handlerTogglePercent}
         >
@@ -100,7 +111,7 @@ export const SlotsOptions: FC<Props> = ({ className }) => {
         <Toggle
           variant="outline"
           className="rounded-l-none -ml-[1px]"
-          title="Показать таймер"
+          title={t("title-btn-show-timer")}
           pressed={showTimer}
           onPressedChange={handlerToggleTimer}
         >

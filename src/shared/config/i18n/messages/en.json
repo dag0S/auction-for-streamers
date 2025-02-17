@@ -1,0 +1,83 @@
+{
+  "AddSlot": {
+    "placeholder": "Name of the new lot",
+    "currency": "$",
+    "btn-add-slot": "ADD LOT"
+  },
+  "SlotSearch": {
+    "placeholder-search": "Search among lots...",
+    "title-btn-search": "Search",
+    "title-btn-clear": "Clear"
+  },
+  "SlotWrapper": {
+    "h2-add-slots": "Add slots",
+    "h2-nothing-found": "Nothing found for this request"
+  },
+  "Slot": {
+    "placeholder-name-slot": "Name",
+    "title-btn-add-cost": "Add cost",
+    "currency": "$",
+    "title-btn-delete-slot": "Delete slot"
+  },
+  "Timer": {
+    "pause": "Pause",
+    "play": "Play",
+    "reset": "Reset",
+    "add-10-sec": "+10 sec",
+    "subtract-10-sec": "-10 sec",
+    "add-20-sec": "+20 sec"
+  },
+  "SlotOptions": {
+    "title-btn-hide-total": "Hide",
+    "title-btn-show-total": "Show amount of money",
+    "currency": "$",
+    "total": "Total",
+    "alert-title": "Are you absolutely sure?",
+    "alert-description": "This action cannot be undone. It will permanently delete all slots.",
+    "title-btn-delete-all-slots": "Delete all slots",
+    "title-btn-show-rules": "Show auction rules",
+    "btn-rules": "RULES",
+    "title-btn-show-percent": "Show percentages",
+    "title-btn-show-timer": "Show timer"
+  },
+  "Alert": {
+    "btn-cancel": "Cancel",
+    "btn-continue": "Continue"
+  },
+  "AppSidebar": {
+    "menu-item-auction": "Auction",
+    "menu-item-wheel": "Wheel of Fortune",
+    "menu-item-help": "About the site",
+    "menu": "menu"
+  },
+  "SwitchTheme": {
+    "theme-light": "Light",
+    "theme-dark": "Dark",
+    "theme-system": "System",
+    "btn-switch-theme": "Change theme"
+  },
+  "SwitchLanguage": {
+    "language": "English"
+  },
+  "RulesDescription": {
+    "title": "Rules",
+    "btn-title-clear": "Clear rules",
+    "placeholder-rules": "Enter the rules"
+  },
+  "HelpPage": {
+    "title": "About the site",
+    "sub-title-1": "Auction for streamers - ",
+    "text-1": "This site is a training copy of ",
+    "text-2": ", and is created solely for educational purposes. It is developed using the following technologies: React, Redux Toolkit, NextJS, Typescript, React Hook Form and Framer Motion. The full source code can be found in the GitHub repository at the ",
+    "link": "link",
+    "text-3": "This site is designed to facilitate interaction between the streamer and their audience, allowing them to make decisions together during the stream. Whether it's choosing a movie, TV series or game for entertainment.",
+    "sub-title-2": "Functional",
+    "list-item-1": "<b>Manage lots:</b> Ability to add, delete, update, search and save lots in local storage.",
+    "list-item-2": "<b>Wheel of Fortune:</b> Determines the winner interactively.",
+    "list-item-3": "<b>Timer:</b> Allows you to set the time for the stream.",
+    "list-item-4": "<b>Themes:</b> Change the application theme (dark/light).",
+    "list-item-5": "<b>Languages:</b> Possibility to select the interface language.",
+    "sub-title-3": "Contacts",
+    "text-4": "You can contact the site creator using the following contacts:"
+  }
+}

@@ -2,6 +2,7 @@
 
 import { Search, X } from "lucide-react";
 import { ChangeEvent, FC, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/src/shared/lib";
 import { Button, Input } from "@/src/shared/shadcn";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/hooks";
@@ -15,6 +16,7 @@ export const SlotSearch: FC<Props> = ({ className }) => {
   const dispatch = useAppDispatch();
   const { searchValue } = useAppSelector((state) => state.search);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const t = useTranslations("SlotSearch");
 
   const handlerSetSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(searchAction.setSearchValue(e.target.value));
@@ -38,12 +40,12 @@ export const SlotSearch: FC<Props> = ({ className }) => {
         size="icon"
         className="absolute top-1/2 -translate-y-1/2"
         onClick={handlerSetFocus}
-        title="Поиск"
+        title={t("title-btn-search")}
       >
         <Search />
       </Button>
       <Input
-        placeholder="Поиск среди лотов ..."
+        placeholder={t("placeholder-search")}
         className="font-semibold px-11"
         value={searchValue || ""}
         onChange={handlerSetSearchValue}
@@ -55,7 +57,7 @@ export const SlotSearch: FC<Props> = ({ className }) => {
           size="icon"
           onClick={handlerClearSearchInput}
           className="absolute top-1/2 right-0 -translate-y-1/2"
-          title="Сброс"
+          title={t("title-btn-clear")}
         >
           <X />
         </Button>
