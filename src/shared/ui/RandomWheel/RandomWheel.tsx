@@ -5,6 +5,8 @@ import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useAppSelector } from "../../lib/hooks";
 import { ISlot } from "@/src/entities/Slot/model/types/slot";
 import { Button } from "../../shadcn";
+import { slotToWheelItem } from "../../utils/slotToWheelItem";
+import { IWheelItem } from "../../types/wheelItem";
 
 interface Props {
   className?: string;
@@ -17,18 +19,13 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd }) => {
   const [rotation, setRotation] = useState(0);
   const spinDuration = 5000;
   const { slots } = useAppSelector((state) => state.slots);
+  const { selectedEmotion } = useAppSelector((state) => state.emotion);
   const totalAmount = slots.reduce((acc, slot) => (acc += +slot.amount), 0);
 
-  const slotsWithColors = useMemo(() => {
-    return slots.map((slot) => {
-      const letters = "0123456789ABCDEF";
-      let color = "#";
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return { ...slot, color };
-    });
-  }, [slots]);
+  const slotsWithColors: IWheelItem[] = useMemo(
+    () => slots.map(slotToWheelItem),
+    [slots]
+  );
 
   const drawWheel = useCallback(() => {
     const wheel = wheelRef.current;
@@ -55,11 +52,13 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd }) => {
       ctx.closePath();
       ctx.fillStyle = slot.color;
       ctx.fill();
+      ctx.stroke();
+      ctx.strokeStyle = "#fff";
 
       ctx.save();
       ctx.translate(centerX, centerY);
       ctx.rotate((startAngle + endAngle) / 2);
-      ctx.fillStyle = "#000";
+      ctx.fillStyle = "#fff";
       ctx.font = "16px";
       ctx.textAlign = "right";
       ctx.fillText(slot.name, radius - 10, 5);
@@ -132,7 +131,12 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd }) => {
 
   return (
     <div className={cn("", className)}>
-      <canvas ref={wheelRef} width={400} height={400} />
+      <div className="relative">
+        <canvas ref={wheelRef} width={600} height={600} />
+        <div
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] border-2 border-white rounded-full bg-[url('/gifs/${selectedEmotion}.webp')] bg-no-repeat bg-cover bg-center`}
+        ></div>
+      </div>
       <Button onClick={spinWheel} disabled={isSpinning}>
         {isSpinning ? "Крутится..." : "Крутить колесо"}
       </Button>

@@ -2,7 +2,7 @@
 
 import { CircleHelp, Gavel, LoaderPinwheel } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { SwitchTheme } from "@/src/features/SwitchTheme";
 import { cn } from "@/src/shared/lib";
 import {
@@ -19,6 +19,9 @@ import {
 import { SwitchLanguage } from "@/src/features/SwitchLanguage";
 import { Link } from "@/src/shared/config/i18n/routing";
 import { useTranslations } from "next-intl";
+import { SLOTS_LOCALSTORAGE_KEY } from "@/src/shared/const/localstorage";
+import { slotsActions } from "@/src/entities/Slot";
+import { useAppDispatch } from "@/src/shared/lib/hooks";
 
 interface Props {
   className?: string;
@@ -27,6 +30,14 @@ interface Props {
 export const AppSidebar: FC<Props> = ({ className }) => {
   const pathname = usePathname();
   const t = useTranslations("AppSidebar");
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const savedSlots = localStorage.getItem(SLOTS_LOCALSTORAGE_KEY);
+    if (savedSlots) {
+      dispatch(slotsActions.setSlots(JSON.parse(savedSlots)));
+    }
+  }, [dispatch]);
 
   const menuItems = useMemo(
     () => [
