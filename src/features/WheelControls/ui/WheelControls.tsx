@@ -43,16 +43,18 @@ export const WheelControls: FC<Props> = ({ className }) => {
               placeholder="От"
               type="number"
               className="w-[80px]"
-              value={timeFrom}
+              value={timeFrom || ""}
               onChange={handleSetTimeFrom}
+              min={0}
             />
             <div className="text-xl">-</div>
             <Input
               placeholder="До"
               type="number"
               className="w-[80px]"
-              value={timeTo}
+              value={timeTo || ""}
               onChange={handleSetTimeTo}
+              min={0}
             />
           </>
         ) : (
@@ -60,8 +62,9 @@ export const WheelControls: FC<Props> = ({ className }) => {
             placeholder="Длительность"
             type="number"
             className="w-[140px]"
-            value={duration}
+            value={duration || ""}
             onChange={handleSetDuration}
+            min={0}
           />
         )}
         <div className="text-xl">c.</div>

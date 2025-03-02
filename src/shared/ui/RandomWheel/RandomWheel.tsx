@@ -18,10 +18,18 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd }) => {
   const wheelRef = useRef<HTMLCanvasElement>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
-  const spinDuration = 5000;
   const { slots } = useAppSelector((state) => state.slots);
   const { selectedEmotion } = useAppSelector((state) => state.emotion);
+  const { duration, isRandomTime, timeFrom, timeTo } = useAppSelector(
+    (state) => state.wheelControls
+  );
   const totalAmount = slots.reduce((acc, slot) => (acc += +slot.amount), 0);
+  const spinDuration = isRandomTime
+    ? Math.floor(
+        Math.random() * (Math.abs(timeFrom - timeTo) + 1) +
+          Math.min(timeFrom, timeTo)
+      ) * 1000
+    : duration * 1000;
 
   const slotsWithColors: IWheelItem[] = useMemo(
     () => slots.map(slotToWheelItem),
