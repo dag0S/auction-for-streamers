@@ -36,6 +36,7 @@ export const ChooseEmotion: FC<Props> = ({ className }) => {
             width={40}
             height={40}
             className="h-full object-cover select-none"
+            unoptimized
           />
         </Button>
       ))}
