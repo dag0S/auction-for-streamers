@@ -13,9 +13,8 @@ interface Props {
 
 export const WheelControls: FC<Props> = ({ className }) => {
   const dispatch = useAppDispatch();
-  const { isRandomTime, timeFrom, timeTo, duration } = useAppSelector(
-    (state) => state.wheelControls
-  );
+  const { isRandomTime, isSpinning, timeFrom, timeTo, duration } =
+    useAppSelector((state) => state.wheelControls);
 
   const handleToggleIsRandomTime = () => {
     dispatch(wheelControlsAction.toggleIsRandomTime());
@@ -33,10 +32,16 @@ export const WheelControls: FC<Props> = ({ className }) => {
     dispatch(wheelControlsAction.setDuration(+e.target.value));
   };
 
+  const handleSpinWheel = () => {
+    dispatch(wheelControlsAction.setIsStartedSpin(true));
+  };
+
   return (
     <div className={cn("flex justify-between items-center gap-2", className)}>
       <div className="flex items-center gap-2">
-        <Button>Крутить</Button>
+        <Button onClick={handleSpinWheel} disabled={isSpinning}>
+          {isSpinning ? "Крутится..." : "Крутить"}
+        </Button>
         {isRandomTime ? (
           <>
             <Input
