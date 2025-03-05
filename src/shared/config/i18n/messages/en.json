@@ -89,5 +89,10 @@
   "WheelControls": {
     "spin": "Spin",
     "spinning": "Spinning..."
+  },
+  "PreviewSlotWheel": {
+    "numberOfParticipants": "Number of participants",
+    "showSlotPreviews": "Show slot previews",
+    "hideSlotPreviews": "Hide slot previews"
   }
 }

@@ -89,5 +89,10 @@
   "WheelControls": {
     "spin": "Крутить",
     "spinning": "Крутится..."
+  },
+  "PreviewSlotWheel": {
+    "numberOfParticipants": "Количество участников",
+    "showSlotPreviews": "Показать превью слотов",
+    "hideSlotPreviews": "Скрыть превью слотов"
   }
 }

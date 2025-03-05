@@ -23,11 +23,8 @@ const WheelPage: FC = () => {
     <div>
       <Container className="p-3 flex flex-col h-screen">
         <h3 className="text-6xl">{t("title")}</h3>
-        <div className="flex justify-between gap-3 flex-grow h-full">
-          <PreviewSlotWheel
-            slots={slotsWithColors}
-            className="flex-1 min-h-0 mt-3"
-          />
+        <div className="flex justify-between gap-3 flex-1 min-h-0">
+          <PreviewSlotWheel slots={slotsWithColors} />
           <Wheel slots={slotsWithColors} />
           <WheelInfo />
         </div>
