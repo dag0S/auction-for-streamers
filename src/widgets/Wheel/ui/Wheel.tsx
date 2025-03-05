@@ -2,31 +2,23 @@
 
 import { ISlot } from "@/src/entities/Slot/model/types/slot";
 import { cn } from "@/src/shared/lib";
-import { useAppSelector } from "@/src/shared/lib/hooks";
 import { IWheelItem } from "@/src/shared/types/wheelItem";
 import { RandomWheel } from "@/src/shared/ui";
-import { shuffleArray, slotToWheelItem } from "@/src/shared/utils";
-import { FC, useMemo } from "react";
+import { FC } from "react";
 
 interface Props {
   className?: string;
+  slots: IWheelItem[];
 }
 
-export const Wheel: FC<Props> = ({ className }) => {
-  const { slots } = useAppSelector((state) => state.slots);
-
-  const slotsWithColors: IWheelItem[] = useMemo(
-    () => shuffleArray(slots.map(slotToWheelItem)),
-    [slots]
-  );
-
+export const Wheel: FC<Props> = ({ className, slots }) => {
   const handlerSpinEnd = (winner: ISlot) => {
     alert(`Победитель: ${winner.name}`);
   };
 
   return (
     <div className={cn("", className)}>
-      <RandomWheel onSpinEnd={handlerSpinEnd} slots={slotsWithColors} />
+      <RandomWheel onSpinEnd={handlerSpinEnd} slots={slots} />
     </div>
   );
 };

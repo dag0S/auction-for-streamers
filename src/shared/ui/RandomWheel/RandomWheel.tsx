@@ -2,6 +2,7 @@
 
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { cn } from "@/src/shared/lib";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks";
 import { ISlot } from "@/src/entities/Slot/model/types/slot";
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
+  const t = useTranslations("RandomWheel");
   const wheelRef = useRef<HTMLCanvasElement>(null);
   const [rotation, setRotation] = useState(0);
   const [currentSlot, setCurrentSlot] = useState<string | null>(null);
@@ -29,6 +31,7 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
     timeFrom,
     timeTo,
   } = useAppSelector((state) => state.wheelControls);
+  const { hoveredSlot } = useAppSelector((state) => state.previewSlot);
   const totalAmount = slots.reduce((acc, slot) => (acc += +slot.amount), 0);
   const spinDuration = isRandomTime
     ? Math.floor(
@@ -61,7 +64,8 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
       ctx.moveTo(centerX, centerY);
       ctx.arc(centerX, centerY, radius, startAngle, endAngle);
       ctx.closePath();
-      ctx.fillStyle = slot.color;
+      ctx.fillStyle =
+        hoveredSlot && hoveredSlot !== slot.id ? "lightgray" : slot.color;
       ctx.fill();
       ctx.strokeStyle = "#fff";
       ctx.stroke();
@@ -91,7 +95,7 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
 
       startAngle = endAngle;
     });
-  }, [slots, totalAmount]);
+  }, [slots, totalAmount, hoveredSlot]);
 
   const getCurrentSlot = useCallback(
     (rotationAngle: number) => {
@@ -207,7 +211,7 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
   return (
     <div className={cn("", className)}>
       <div className="text-2xl mx-auto text-center truncate w-[400px]">
-        {currentSlot || "Победитель"}
+        {currentSlot || t("winner")}
       </div>
       <div className="relative">
         <canvas ref={wheelRef} width={600} height={600} />

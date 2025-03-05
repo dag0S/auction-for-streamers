@@ -6,12 +6,14 @@ import { cn } from "@/src/shared/lib";
 import { Button, Input, Toggle } from "@/src/shared/shadcn";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/hooks";
 import { wheelControlsAction } from "../model/slice/wheelControlsSlice";
+import { useTranslations } from "next-intl";
 
 interface Props {
   className?: string;
 }
 
 export const WheelControls: FC<Props> = ({ className }) => {
+  const t = useTranslations("WheelControls");
   const dispatch = useAppDispatch();
   const { isRandomTime, isSpinning, timeFrom, timeTo, duration } =
     useAppSelector((state) => state.wheelControls);
@@ -40,7 +42,7 @@ export const WheelControls: FC<Props> = ({ className }) => {
     <div className={cn("flex justify-between items-center gap-2", className)}>
       <div className="flex items-center gap-2">
         <Button onClick={handleSpinWheel} disabled={isSpinning}>
-          {isSpinning ? "Крутится..." : "Крутить"}
+          {isSpinning ? t("spinning") : t("spin")}
         </Button>
         {isRandomTime ? (
           <>

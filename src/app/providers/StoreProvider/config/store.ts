@@ -5,6 +5,7 @@ import { optionsReducer } from "@/src/features/SlotsOptions";
 import { rulesDescReducer } from "@/src/features/RulesDescription";
 import { emotionReducer } from "@/src/features/ChooseEmotion";
 import { wheelControlsReducer } from "@/src/features/WheelControls";
+import { previewSlotReducer } from "@/src/features/PreviewSlotWheel";
 
 export const makeStore = () => {
   return configureStore({
@@ -15,6 +16,7 @@ export const makeStore = () => {
       rulesDesc: rulesDescReducer,
       emotion: emotionReducer,
       wheelControls: wheelControlsReducer,
+      previewSlot: previewSlotReducer,
     },
   });
 };

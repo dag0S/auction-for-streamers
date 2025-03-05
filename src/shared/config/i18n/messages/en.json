@@ -79,5 +79,15 @@
     "list-item-5": "<b>Languages:</b> Possibility to select the interface language.",
     "sub-title-3": "Contacts",
     "text-4": "You can contact the site creator using the following contacts:"
+  },
+  "WheelPage": {
+    "title": "Wheel"
+  },
+  "RandomWheel": {
+    "winner": "Winner"
+  },
+  "WheelControls": {
+    "spin": "Spin",
+    "spinning": "Spinning..."
   }
 }
