@@ -1,9 +1,7 @@
-"use client";
-
-import { ISlot } from "@/src/entities/Slot/model/types/slot";
 import { cn } from "@/src/shared/lib";
 import { IWheelItem } from "@/src/shared/types/wheelItem";
 import { RandomWheel } from "@/src/shared/ui";
+import { useTranslations } from "next-intl";
 import { FC } from "react";
 
 interface Props {
@@ -12,13 +10,15 @@ interface Props {
 }
 
 export const Wheel: FC<Props> = ({ className, slots }) => {
-  const handlerSpinEnd = (winner: ISlot) => {
-    alert(`Победитель: ${winner.name}`);
-  };
+  const t = useTranslations("Wheel");
 
   return (
     <div className={cn("", className)}>
-      <RandomWheel onSpinEnd={handlerSpinEnd} slots={slots} />
+      {slots.length > 0 ? (
+        <RandomWheel slots={slots} />
+      ) : (
+        <div className="text-2xl">{t("AddAtLeastOneLot")}</div>
+      )}
     </div>
   );
 };

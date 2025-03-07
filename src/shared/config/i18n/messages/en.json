@@ -84,7 +84,9 @@
     "title": "Wheel"
   },
   "RandomWheel": {
-    "winner": "Winner"
+    "winner": "Winner",
+    "great": "Great!",
+    "spinAgain": "Spin again"
   },
   "WheelControls": {
     "spin": "Spin",
@@ -94,5 +96,23 @@
     "numberOfParticipants": "Number of participants",
     "showSlotPreviews": "Show slot previews",
     "hideSlotPreviews": "Hide slot previews"
+  },
+  "WheelPageMetadata": {
+    "title": "Streamer Auction | Wheel of Fortune",
+    "description": "Wheel of Fortune, determine the winner, spin the wheel"
+  },
+  "HelpPageMetadata": {
+    "title": "Streamer Auction | About the site",
+    "description": "Information about the site, technology stack, functionality, contacts"
+  },
+  "LayoutMetadata": {
+    "title": "Streamer Auction | Decide the winner with the Wheel of Fortune",
+    "description": "Streamer Auction | Decide the winner with the Wheel of Fortune"
+  },
+  "Wheel": {
+    "AddAtLeastOneLot": "Add at least one lot"
+  },
+  "NotFoundPage": {
+    "title": "Page not found | 404"
   }
 }

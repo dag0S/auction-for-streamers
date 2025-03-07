@@ -1,1 +1,1 @@
-export { metadata, default as MainLayout } from "./MainLayout";
+export { generateMetadata, default as MainLayout } from "./MainLayout";

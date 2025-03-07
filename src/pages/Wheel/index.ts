@@ -1,1 +1,1 @@
-export { default as WheelPage } from "./ui/WheelPage";
+export { default as WheelPage, generateMetadata } from "./ui/WheelPage";

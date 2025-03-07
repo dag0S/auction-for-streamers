@@ -3,24 +3,25 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import confetti from "canvas-confetti";
 import { cn } from "@/src/shared/lib";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks";
-import { ISlot } from "@/src/entities/Slot/model/types/slot";
 import { fittingString } from "../../utils";
 import { IWheelItem } from "../../types/wheelItem";
 import { wheelControlsAction } from "@/src/features/WheelControls";
+import { Button } from "../../shadcn";
 
 interface Props {
   className?: string;
-  onSpinEnd: (winner: ISlot) => void;
   slots: IWheelItem[];
 }
 
-export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
+export const RandomWheel: FC<Props> = ({ className, slots }) => {
   const t = useTranslations("RandomWheel");
   const wheelRef = useRef<HTMLCanvasElement>(null);
   const [rotation, setRotation] = useState(0);
   const [currentSlot, setCurrentSlot] = useState<string | null>(null);
+  const [winner, setWinner] = useState<string | null>(null);
   const dispatch = useAppDispatch();
   const { selectedEmotion } = useAppSelector((state) => state.emotion);
   const {
@@ -40,6 +41,30 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
       ) * 1000
     : duration * 1000;
 
+  const launchConfetti = () => {
+    const duration = 1500;
+    const end = Date.now() + duration;
+
+    const frame = () => {
+      confetti({
+        particleCount: 7,
+        spread: 360,
+        startVelocity: 40,
+        scalar: 1.2,
+        origin: {
+          x: Math.random(),
+          y: Math.random() * 0.5,
+        },
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    };
+
+    frame();
+  };
+
   const drawWheel = useCallback(() => {
     const wheel = wheelRef.current;
 
@@ -56,7 +81,7 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
 
     ctx.clearRect(0, 0, wheel.width, wheel.height);
 
-    slots.forEach((slot, i) => {
+    slots.forEach((slot) => {
       const endAngle = startAngle + (+slot.amount / totalAmount) * 2 * Math.PI;
 
       ctx.beginPath();
@@ -78,17 +103,7 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
       ctx.textAlign = "right";
 
       if (+slot.amount / totalAmount > 0.04) {
-        ctx.fillText(
-          fittingString(
-            ctx,
-            `${i + 1} | ${Math.trunc((+slot.amount / totalAmount) * 100)}% ${
-              slot.name
-            }`,
-            200
-          ),
-          radius - 10,
-          5
-        );
+        ctx.fillText(fittingString(ctx, slot.name, 200), radius - 10, 5);
       }
 
       ctx.restore();
@@ -138,7 +153,8 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
             (normalizedRotation >= cumulativeAngle ||
               normalizedRotation < (cumulativeAngle + slotAngle) % 360))
         ) {
-          onSpinEnd(slot as ISlot);
+          setWinner(slot.name);
+          launchConfetti();
           return slot.name;
         }
 
@@ -147,7 +163,7 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
 
       return null;
     },
-    [onSpinEnd, slots, totalAmount]
+    [slots, totalAmount]
   );
 
   const spinWheel = useCallback(() => {
@@ -187,7 +203,10 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
   ]);
 
   useEffect(() => {
-    if (isStartedSpin) spinWheel();
+    if (isStartedSpin) {
+      setWinner(null);
+      spinWheel();
+    }
   }, [spinWheel, isStartedSpin]);
 
   useEffect(() => {
@@ -207,6 +226,14 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
     drawWheel();
     ctx.restore();
   }, [drawWheel, rotation]);
+
+  const handleCloseWinner = () => {
+    setWinner(null);
+  };
+
+  const handleSpinWheel = () => {
+    dispatch(wheelControlsAction.setIsStartedSpin(true));
+  };
 
   return (
     <div className={cn("", className)}>
@@ -233,6 +260,22 @@ export const RandomWheel: FC<Props> = ({ className, onSpinEnd, slots }) => {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-full select-none w-[100px] h-[100px] object-cover"
           unoptimized
         />
+        {winner && (
+          <div className="absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,0,0,1)_10%,rgba(0,0,0,0)_70%,rgba(0,0,0,0)_100%)]">
+            <div className="text-4xl mb-2 text-white">🎉 {t("winner")} 🎉</div>
+            <div className="text-3xl mb-2 text-center truncate w-[550px] text-white">
+              {winner}
+            </div>
+            <div className="flex gap-3">
+              <Button size="sm" onClick={handleCloseWinner}>
+                {t("great")}
+              </Button>
+              <Button size="sm" variant="secondary" onClick={handleSpinWheel}>
+                {t("spinAgain")}
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

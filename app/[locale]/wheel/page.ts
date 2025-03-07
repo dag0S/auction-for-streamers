@@ -1,1 +1,1 @@
-export { WheelPage as default } from "@/src/pages/Wheel";
+export { WheelPage as default, generateMetadata } from "@/src/pages/Wheel";

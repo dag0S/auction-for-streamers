@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
+import NextTopLoader from "nextjs-toploader";
 import { SidebarProvider, SidebarTrigger } from "@/src/shared/shadcn";
 import { AppSidebar } from "@/src/widgets/AppSidebar";
 import { StoreProvider } from "../../providers/StoreProvider";
@@ -17,12 +18,15 @@ const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
 });
 
-export const metadata: Metadata = {
-  title:
-    "Аукцион для стримеров | Определите победителя с помощью Колеса Фортуны",
-  description:
-    "Аукцион стримеров | Определите победителя с помощью Колеса Фортуны",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("LayoutMetadata");
+
+  return {
+    title: t("title"),
+    description: t("description"),
+    icons: "/icons/logo.svg",
+  };
+}
 
 const MainLayout = async ({
   children,
@@ -51,6 +55,7 @@ const MainLayout = async ({
               enableSystem
               disableTransitionOnChange
             >
+              <NextTopLoader color="#7b3aec" />
               <SidebarProvider className="relative">
                 <AppSidebar />
                 <main className="w-full">

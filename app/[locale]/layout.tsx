@@ -1,1 +1,4 @@
-export { metadata, MainLayout as default } from "@/src/app/layouts/MainLayout";
+export {
+  generateMetadata,
+  MainLayout as default,
+} from "@/src/app/layouts/MainLayout";

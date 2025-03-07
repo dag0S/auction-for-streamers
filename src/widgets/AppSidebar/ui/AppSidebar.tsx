@@ -3,6 +3,8 @@
 import { CircleHelp, Gavel, LoaderPinwheel } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { FC, useEffect, useMemo } from "react";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { SwitchTheme } from "@/src/features/SwitchTheme";
 import { cn } from "@/src/shared/lib";
 import {
@@ -18,7 +20,6 @@ import {
 } from "@/src/shared/shadcn";
 import { SwitchLanguage } from "@/src/features/SwitchLanguage";
 import { Link } from "@/src/shared/config/i18n/routing";
-import { useTranslations } from "next-intl";
 import { SLOTS_LOCALSTORAGE_KEY } from "@/src/shared/const/localstorage";
 import { slotsActions } from "@/src/entities/Slot";
 import { useAppDispatch } from "@/src/shared/lib/hooks";
@@ -94,6 +95,25 @@ export const AppSidebar: FC<Props> = ({ className }) => {
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SwitchTheme />
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton className="w-fit">
+              <a href="https://t.me/DanilaGosudarev" target="_blank">
+                <Image src="/icons/tg.svg" alt="tg" width={24} height={24} />
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton className="w-fit">
+              <a href="https://github.com/dag0S" target="_blank">
+                <Image
+                  src="/icons/gitHub.svg"
+                  alt="gitHub"
+                  width={24}
+                  height={24}
+                />
+              </a>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>

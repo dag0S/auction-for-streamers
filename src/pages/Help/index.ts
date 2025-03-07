@@ -1,2 +1,1 @@
-export { default as HelpPage } from "./ui/HelpPage";
-export { metadata } from "./ui/HelpPage";
+export { default as HelpPage, generateMetadata } from "./ui/HelpPage";

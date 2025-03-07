@@ -1,13 +1,18 @@
 import { Metadata } from "next";
 import { FC } from "react";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { ScrollArea } from "@/src/shared/shadcn";
 import { Container } from "@/src/shared/ui";
-import { useTranslations } from "next-intl";
 
-export const metadata: Metadata = {
-  title: "Аукцион для стримеров | О сайте",
-  description: "Информация о сайте, стек технологий, функционал, контакты",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("HelpPageMetadata");
+
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 const HelpPage: FC = () => {
   const t = useTranslations("HelpPage");
