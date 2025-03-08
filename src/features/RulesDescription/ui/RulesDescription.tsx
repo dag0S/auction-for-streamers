@@ -43,7 +43,7 @@ export const RulesDescription: FC<Props> = ({ className }) => {
   }
 
   return (
-    <div className={cn("h-full", className)}>
+    <div className={cn("xl:h-full", className)}>
       <div className="flex gap-3">
         <h2 className="text-4xl mb-3">{t("title")}</h2>
         <Button
@@ -57,7 +57,7 @@ export const RulesDescription: FC<Props> = ({ className }) => {
       </div>
       <Textarea
         placeholder={t("placeholder-rules")}
-        className="w-80 md:text-xl placeholder:text-xl h-1/2 max-h-full"
+        className="w-full md:w-80 md:text-xl placeholder:text-xl h-1/2 max-h-full"
         value={descriptionValue}
         onChange={handlerSetDesc}
       />

@@ -55,7 +55,7 @@ const MainLayout = async ({
               enableSystem
               disableTransitionOnChange
             >
-              <NextTopLoader color="#7b3aec" />
+              <NextTopLoader color="#7b3aec" showSpinner={false} />
               <SidebarProvider className="relative">
                 <AppSidebar />
                 <main className="w-full">

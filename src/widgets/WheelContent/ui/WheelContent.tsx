@@ -21,10 +21,17 @@ export const WheelContent: FC<Props> = ({ className }) => {
   );
 
   return (
-    <div className={cn("flex justify-between gap-3 flex-1 min-h-0", className)}>
-      <PreviewSlotWheel slots={slotsWithColors} />
-      <Wheel slots={slotsWithColors} />
-      <WheelInfo />
+    <div
+      className={cn(
+        "flex md:flex-row flex-col gap-1 md:gap-3 flex-1 min-h-0",
+        className
+      )}
+    >
+      <PreviewSlotWheel className="order-1 md:-order-1 min-h-0" slots={slotsWithColors} />
+      <div className="flex gap-1 md:gap-3 flex-wrap justify-center">
+        <Wheel slots={slotsWithColors}/>
+        <WheelInfo />
+      </div>
     </div>
   );
 };

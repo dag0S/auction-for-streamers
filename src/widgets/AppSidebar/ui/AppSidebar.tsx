@@ -17,6 +17,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/src/shared/shadcn";
 import { SwitchLanguage } from "@/src/features/SwitchLanguage";
 import { Link } from "@/src/shared/config/i18n/routing";
@@ -32,6 +33,7 @@ export const AppSidebar: FC<Props> = ({ className }) => {
   const pathname = usePathname();
   const t = useTranslations("AppSidebar");
   const dispatch = useAppDispatch();
+  const { setOpenMobile } = useSidebar();
 
   useEffect(() => {
     const savedSlots = localStorage.getItem(SLOTS_LOCALSTORAGE_KEY);
@@ -61,6 +63,10 @@ export const AppSidebar: FC<Props> = ({ className }) => {
     [t]
   );
 
+  const handleCloseSidebar = () => {
+    setOpenMobile(false);
+  };
+
   return (
     <Sidebar className={cn("", className)} collapsible="icon">
       <SidebarContent className="pt-10">
@@ -76,6 +82,7 @@ export const AppSidebar: FC<Props> = ({ className }) => {
                     asChild
                     isActive={pathname === item.url}
                     className="text-lg py-5"
+                    onClick={handleCloseSidebar}
                   >
                     <Link href={item.url} className="flex items-center gap-4">
                       <item.icon />

@@ -60,64 +60,79 @@ export const Slot = forwardRef<HTMLDivElement, Props>(
     };
 
     return (
-      <div className={cn("flex items-center gap-3", className)} ref={ref}>
-        <div>{number}.</div>
-        <Badge>#{fastId}</Badge>
+      <div
+        className={cn(
+          "flex items-start md:items-center gap-1 lg:gap-3",
+          className
+        )}
+        ref={ref}
+      >
+        <div className="flex gap-1 lg:gap-3 pt-2 md:pt-0">
+          <div>{number}.</div>
+          <Badge>#{fastId}</Badge>
+        </div>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex items-center gap-3 w-full"
+            className="flex flex-col md:flex-row md:items-center gap-1 lg:gap-3 w-full"
           >
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <Input placeholder={t("placeholder-name-slot")} {...field} />
+            <div className="flex gap-1 lg:gap-3 w-full items-center">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <Input placeholder={t("placeholder-name-slot")} {...field} />
+                )}
+              />
+              {showPercent && (
+                <div className="min-w-14 text-center md:text-right ">
+                  {percent}%
+                </div>
               )}
-            />
-            {showPercent && (
-              <div className="min-w-14 text-right">{percent}%</div>
-            )}
-            <FormField
-              control={form.control}
-              name="amount"
-              render={({ field }) => (
-                <Input
-                  type="number"
-                  placeholder={t("currency")}
-                  className="w-32"
-                  {...field}
-                />
-              )}
-            />
-            <Button
-              type="submit"
-              variant="ghost"
-              title={t("title-btn-add-cost")}
-            >
-              <Plus hanging={24} width={24} />
-            </Button>
-            <FormField
-              control={form.control}
-              name="extraMoney"
-              render={({ field }) => (
-                <Input
-                  type="number"
-                  placeholder={t("currency")}
-                  className="w-24"
-                  {...field}
-                />
-              )}
-            />
+            </div>
+            <div className="flex md:items-center gap-1 lg:gap-3">
+              <FormField
+                control={form.control}
+                name="amount"
+                render={({ field }) => (
+                  <Input
+                    type="number"
+                    placeholder={t("currency")}
+                    className="w-full md:w-32"
+                    {...field}
+                  />
+                )}
+              />
+              <Button
+                type="submit"
+                variant="ghost"
+                title={t("title-btn-add-cost")}
+              >
+                <Plus hanging={24} width={24} />
+              </Button>
+              <FormField
+                control={form.control}
+                name="extraMoney"
+                render={({ field }) => (
+                  <Input
+                    type="number"
+                    placeholder={t("currency")}
+                    className="w-full md:w-24"
+                    {...field}
+                  />
+                )}
+              />
+              <Button
+                variant="destructive"
+                onClick={handleRemoveSlot}
+                title={t("title-btn-delete-slot")}
+                className="min-w-14 md:min-w-fit"
+              >
+                <Trash />
+              </Button>
+            </div>
           </form>
         </Form>
-        <Button
-          variant="destructive"
-          onClick={handleRemoveSlot}
-          title={t("title-btn-delete-slot")}
-        >
-          <Trash />
-        </Button>
       </div>
     );
   }

@@ -10,6 +10,7 @@ import { fittingString } from "../../utils";
 import { IWheelItem } from "../../types/wheelItem";
 import { wheelControlsAction } from "@/src/features/WheelControls";
 import { Button } from "../../shadcn";
+import { useIsMobile } from "../../hooks/use-mobile";
 
 interface Props {
   className?: string;
@@ -18,6 +19,7 @@ interface Props {
 
 export const RandomWheel: FC<Props> = ({ className, slots }) => {
   const t = useTranslations("RandomWheel");
+  const isMobile = useIsMobile();
   const wheelRef = useRef<HTMLCanvasElement>(null);
   const [rotation, setRotation] = useState(0);
   const [currentSlot, setCurrentSlot] = useState<string | null>(null);
@@ -42,7 +44,7 @@ export const RandomWheel: FC<Props> = ({ className, slots }) => {
     : duration * 1000;
 
   const launchConfetti = () => {
-    const duration = 1500;
+    const duration = isMobile ? 3000 : 1500;
     const end = Date.now() + duration;
 
     const frame = () => {
@@ -110,7 +112,8 @@ export const RandomWheel: FC<Props> = ({ className, slots }) => {
 
       startAngle = endAngle;
     });
-  }, [slots, totalAmount, hoveredSlot]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slots, totalAmount, hoveredSlot, isMobile]);
 
   const getCurrentSlot = useCallback(
     (rotationAngle: number) => {
@@ -237,11 +240,15 @@ export const RandomWheel: FC<Props> = ({ className, slots }) => {
 
   return (
     <div className={cn("", className)}>
-      <div className="text-2xl mx-auto text-center truncate w-[400px]">
+      <div className="text-2xl mx-auto text-center truncate w-[300px] md:w-[400px]">
         {currentSlot || t("winner")}
       </div>
       <div className="relative">
-        <canvas ref={wheelRef} width={600} height={600} />
+        <canvas
+          ref={wheelRef}
+          width={isMobile ? 360 : 600}
+          height={isMobile ? 360 : 600}
+        />
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2"
           style={{
@@ -254,16 +261,16 @@ export const RandomWheel: FC<Props> = ({ className, slots }) => {
         />
         <Image
           src={`/gifs/${selectedEmotion}.webp`}
-          width={100}
-          height={100}
+          width={isMobile ? 70 : 100}
+          height={isMobile ? 70 : 100}
           alt="emotion"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-full select-none w-[100px] h-[100px] object-cover"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-full select-none w- object-cover w-[70px] h-[70px] md:w-[100px] md:h-[100px]"
           unoptimized
         />
         {winner && (
-          <div className="absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,0,0,1)_10%,rgba(0,0,0,0)_70%,rgba(0,0,0,0)_100%)]">
+          <div className="absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center w-[360px] h-[360px] md:w-[600px] md:h-[600px] bg-[radial-gradient(circle,rgba(0,0,0,1)_10%,rgba(0,0,0,0)_70%,rgba(0,0,0,0)_100%)]">
             <div className="text-4xl mb-2 text-white">🎉 {t("winner")} 🎉</div>
-            <div className="text-3xl mb-2 text-center truncate w-[550px] text-white">
+            <div className="text-3xl mb-2 text-center truncate w-[340px] md:w-[550px] text-white">
               {winner}
             </div>
             <div className="flex gap-3">

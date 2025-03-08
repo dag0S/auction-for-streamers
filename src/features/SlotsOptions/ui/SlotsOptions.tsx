@@ -51,7 +51,12 @@ export const SlotsOptions: FC<Props> = ({ className }) => {
   };
 
   return (
-    <div className={cn("flex justify-center gap-3 py-3 relative", className)}>
+    <div
+      className={cn(
+        "flex justify-center gap-3 py-1 md:py-3 relative",
+        className
+      )}
+    >
       <div className="absolute t-0 left-0 flex gap-3 items-center">
         <Button
           variant="ghost"
@@ -67,7 +72,7 @@ export const SlotsOptions: FC<Props> = ({ className }) => {
           {showTotalAmount ? <EyeClosed /> : <Eye />}
         </Button>
         {showTotalAmount && (
-          <span>
+          <span className="border py-1 px-2 rounded-md bg-background">
             {t("total")}: {totalAmount}
             {t("currency")}
           </span>

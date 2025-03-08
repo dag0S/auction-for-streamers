@@ -34,7 +34,7 @@ export const SlotSearch: FC<Props> = ({ className }) => {
   };
 
   return (
-    <div className={cn("relative w-[400px]", className)}>
+    <div className={cn("relative w-full lg:w-[400px]", className)}>
       <Button
         variant="ghost"
         size="icon"

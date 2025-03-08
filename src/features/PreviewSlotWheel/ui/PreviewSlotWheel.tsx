@@ -27,23 +27,28 @@ export const PreviewSlotWheel: FC<Props> = ({ className, slots }) => {
   };
 
   return (
-    <div className={cn("flex flex-col gap-3 h-full", className)}>
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={handleToggleShowPreview}
-        title={showPreview ? t("hideSlotPreviews") : t("showSlotPreviews")}
-      >
-        {showPreview ? <ChevronsLeft /> : <ChevronsRight />}
-      </Button>
+    <div className={cn("flex flex-col gap-1 md:gap-3 h-full", className)}>
+      <div className="flex gap-3 items-center">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleToggleShowPreview}
+          title={showPreview ? t("hideSlotPreviews") : t("showSlotPreviews")}
+        >
+          {showPreview ? <ChevronsLeft /> : <ChevronsRight />}
+        </Button>
+        <div className="md:hidden">
+          {t("numberOfParticipants")} - {slots.length}
+        </div>
+      </div>
       {showPreview && (
         <div className="flex flex-col flex-1 min-h-0">
-          <ScrollArea className="w-[400px] flex-1 min-h-0">
+          <ScrollArea className="w-full pr-3 md:w-[300px] xl:w-[400px] flex-1 min-h-0">
             {sortedSlots.map((slot) => (
               <Button
                 variant="ghost"
                 key={slot.id}
-                className="w-[388px] justify-between mb-2"
+                className="w-full justify-between mb-2"
                 onMouseEnter={() =>
                   dispatch(previewSlotAction.setHoveredSlot(slot.id))
                 }
@@ -54,7 +59,9 @@ export const PreviewSlotWheel: FC<Props> = ({ className, slots }) => {
                   background: `linear-gradient(to right, transparent, ${slot.color})`,
                 }}
               >
-                <div className="overflow-hidden text-ellipsis">{slot.name}</div>
+                <div className="text-left truncate w-[200px] md:w-[125px] xl:w-[220px]">
+                  {slot.name}
+                </div>
                 <div className="flex items-center gap-2">
                   <div>{slot.amount}</div>
                   <Separator
@@ -69,7 +76,7 @@ export const PreviewSlotWheel: FC<Props> = ({ className, slots }) => {
               </Button>
             ))}
           </ScrollArea>
-          <div className="mt-auto pt-3">
+          <div className="mt-auto pt-3 hidden md:block">
             {t("numberOfParticipants")} - {slots.length}
           </div>
         </div>

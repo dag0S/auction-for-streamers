@@ -10,10 +10,10 @@ interface Props {
 
 export const SlotsHeader: FC<Props> = ({ className }) => {
   return (
-    <div className={cn("flex gap-3 items-center", className)}>
+    <div className={cn("flex flex-col lg:flex-row gap-2 md:gap-3 items-center", className)}>
       <AddSlot />
-      <Separator orientation="vertical" className="h-full" />
-      <SlotSearch />
+      <Separator orientation="vertical" className="h-full hidden lg:block" />
+      <SlotSearch className="-order-1 lg:order-1" />
     </div>
   );
 };

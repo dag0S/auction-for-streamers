@@ -45,11 +45,11 @@ export const SlotsWrapper: FC<Props> = ({ className }) => {
   }
 
   return (
-    <ScrollArea className={cn("border rounded-md", className)}>
+    <ScrollArea className={cn("sm:border rounded-md pr-2 lg:pr-0", className)}>
       <AnimatePresence>
         {filteredSlots.map((slot, index) => (
           <MotionSlot
-            className="p-3"
+            className="p-1 lg:p-3"
             amount={slot.amount}
             fastId={slot.fastId}
             name={slot.name}

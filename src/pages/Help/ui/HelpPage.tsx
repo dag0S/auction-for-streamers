@@ -18,9 +18,9 @@ const HelpPage: FC = () => {
   const t = useTranslations("HelpPage");
 
   return (
-    <ScrollArea className="pt-2 h-svh">
+    <ScrollArea className="pt-11 md:pt-2 h-svh">
       <Container className="max-w-[1000px]">
-        <h2 className="text-6xl mb-2">{t("title")}</h2>
+        <h2 className="text-4xl md:text-6xl mb-2">{t("title")}</h2>
         <h3 className="text-2xl mb-2">
           {t("sub-title-1")}
           <a className="text-blue-400 underline hover:opacity-80" href="#">

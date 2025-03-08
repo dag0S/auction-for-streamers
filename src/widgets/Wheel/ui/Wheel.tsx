@@ -13,7 +13,7 @@ export const Wheel: FC<Props> = ({ className, slots }) => {
   const t = useTranslations("Wheel");
 
   return (
-    <div className={cn("", className)}>
+    <div className={cn("h-fit", className)}>
       {slots.length > 0 ? (
         <RandomWheel slots={slots} />
       ) : (

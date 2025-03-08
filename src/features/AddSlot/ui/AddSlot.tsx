@@ -45,7 +45,7 @@ export const AddSlot: FC<Props> = ({ className }) => {
   return (
     <Form {...form}>
       <form
-        className={cn("flex gap-3 items-center w-full", className)}
+        className={cn("flex flex-col md:flex-row gap-2 md:gap-3 md:items-center w-full", className)}
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -64,25 +64,27 @@ export const AddSlot: FC<Props> = ({ className }) => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="amount"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  placeholder={t("currency")}
-                  type="number"
-                  className="w-32 font-semibold"
-                  {...field}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <Button type="submit">
-          <Plus /> {t("btn-add-slot")}
-        </Button>
+        <div className="flex gap-2 md:gap-3">
+          <FormField
+            control={form.control}
+            name="amount"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormControl>
+                  <Input
+                    placeholder={t("currency")}
+                    type="number"
+                    className="md:w-32 font-semibold"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <Button type="submit">
+            <Plus /> {t("btn-add-slot")}
+          </Button>
+        </div>
       </form>
     </Form>
   );

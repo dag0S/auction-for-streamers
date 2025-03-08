@@ -9,8 +9,8 @@ interface Props {
 
 export const WheelInfo: FC<Props> = ({ className }) => {
   return (
-    <div className={cn("w-[400px]", className)}>
-      <WheelControls className="mb-4" />
+    <div className={cn("w-screen md:w-[400px] px-1 sm:px-0", className)}>
+      <WheelControls className="mb-1 md:mb-4" />
       <ChooseEmotion />
     </div>
   );

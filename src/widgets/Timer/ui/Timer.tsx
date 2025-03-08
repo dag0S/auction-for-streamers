@@ -105,7 +105,7 @@ export const Timer: FC<Props> = ({ className, initialTime = 600000 }) => {
   }
 
   return (
-    <div className={cn("", className)}>
+    <div className={cn("m-auto md:m-0", className)}>
       <div className="text-7xl text-center font-mono">
         {formatTime(displayTime)}
       </div>

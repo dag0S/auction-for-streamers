@@ -18,8 +18,8 @@ const WheelPage: FC = async () => {
 
   return (
     <div>
-      <Container className="p-3 flex flex-col h-screen">
-        <h3 className="text-6xl">{t("title")}</h3>
+      <Container className="pt-2 px-1 md:p-3 flex flex-col h-screen-safe">
+        <h3 className="text-4xl xl:text-6xl hidden md:block">{t("title")}</h3>
         <WheelContent />
       </Container>
     </div>

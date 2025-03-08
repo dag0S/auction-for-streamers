@@ -2,7 +2,7 @@ export { Button } from "./button";
 export { Input } from "./input";
 export { Separator } from "./separator";
 export { Badge } from "./badge";
-export { ScrollArea } from "./scroll-area";
+export { ScrollArea, ScrollBar } from "./scroll-area";
 export {
   Sidebar,
   SidebarContent,
