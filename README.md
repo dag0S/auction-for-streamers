@@ -14,7 +14,7 @@
 
 ## Стек технологий
 
-**Next.js 15** | **TypeScript** | **Tailwind CSS** | **ShadCN/UI** | **React Hook Form** | **Zod** | **Framer Motion** | **Canvas** | **ESLint + Prettier**
+**Next.js 15** | **TypeScript** | **Redux Toolkit** | **Tailwind CSS** | **ShadCN/UI** | **React Hook Form** | **Zod** | **Framer Motion** | **Canvas** | **ESLint + Prettier**
 
 ---
 
